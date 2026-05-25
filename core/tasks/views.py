@@ -1,7 +1,9 @@
-from .models import Tasks
-
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
+
+from .forms import TaskForm
+from .models import Tasks
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -11,3 +13,14 @@ class TaskListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Tasks.objects.filter(user=self.request.user)
+
+
+class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = Tasks
+    form_class = TaskForm
+    template_name = 'tasks/task_form.html'
+    success_url = reverse_lazy('tasks:list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

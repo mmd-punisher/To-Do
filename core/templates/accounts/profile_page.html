@@ -16,12 +16,13 @@
             <p><strong>تاریخ عضویت:</strong> {{ user.created_date|date:"Y/m/d" }}</p>
             <p><strong>آخرین ورود:</strong> {{ user.last_login|date:"Y/m/d H:i" }}</p>
 
-{#            <a href="{% url 'accounts:logout' %}" class="btn btn-danger">خروج</a>#}
+            {#            <a href="{% url 'accounts:logout' %}" class="btn btn-danger">خروج</a>#}
             <form action="{% url 'accounts:logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">خروج</button>
             </form>
-            {#            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">ویرایش پروفایل</a>#}
+
+            <a href="{% url 'tasks:list' %}" class="btn btn-primary">لیست تسک ها</a>
         </div>
     </div>
 </div>
