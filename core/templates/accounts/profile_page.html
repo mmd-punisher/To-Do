@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>پروفایل کاربری</h2>
+
+    <div class="card">
+        <div class="card-body">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="Avatar" style="width: 150px; height: 150px; border-radius: 50%;">
+            {% else %}
+                <div style="width: 150px; height: 150px; border-radius: 50%; background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+                    بدون آواتار
+                </div>
+            {% endif %}
+
+            <h3>{{ user.username }}</h3>
+            <p><strong>ایمیل:</strong> {{ user.email }}</p>
+            <p><strong>تاریخ عضویت:</strong> {{ user.created_date|date:"Y/m/d" }}</p>
+            <p><strong>آخرین ورود:</strong> {{ user.last_login|date:"Y/m/d H:i" }}</p>
+
+{#            <a href="{% url 'accounts:logout' %}" class="btn btn-danger">خروج</a>#}
+            <form action="{% url 'accounts:logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">خروج</button>
+            </form>
+            {#            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">ویرایش پروفایل</a>#}
+        </div>
+    </div>
+</div>
