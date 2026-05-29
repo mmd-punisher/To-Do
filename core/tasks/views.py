@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from .forms import TaskForm
 from .models import Tasks
@@ -30,6 +30,14 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Tasks
     form_class = TaskForm
     template_name = 'tasks/task_form.html'
+    success_url = reverse_lazy('tasks:list')
+
+    def get_queryset(self):
+        return Tasks.objects.filter(user=self.request.user)
+
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
+    model = Tasks
+    template_name = 'tasks/task_confirm_delete.html'
     success_url = reverse_lazy('tasks:list')
 
     def get_queryset(self):

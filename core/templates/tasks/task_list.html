@@ -6,7 +6,7 @@
                 {{ task.description }}
                 <div class="task-actions">
                     <a href="{% url 'tasks:update' task.id %}" class="edit">Edit</a>
-                    <a href="" class="delete">Delete</a>
+                    <a href="{% url 'tasks:delete' task.id %}" class="delete">Delete</a>
                 </div>
             </li>
             <br/>
