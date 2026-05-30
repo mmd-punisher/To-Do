@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TO DO{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<nav class="navbar">
+    <a href="{% url 'accounts:home' %}" class="navbar-brand">Todo</a>
+
+    {% if user.is_authenticated %}
+        <ul class="navbar-links">
+            <li><a href="#">Todos</a></li>
+            <li><a href="#">Add</a></li>
+            <li><a href="#">Profile</a></li>
+        </ul>
+    {% else %}
+        <ul class="navbar-links">
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'accounts:register' %}">Sign Up</a></li>
+        </ul>
+    {% endif %}
+</nav>
+{% block body %}{% endblock %}
+
+</body>
+</html>

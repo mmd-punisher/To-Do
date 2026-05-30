@@ -1,9 +1,11 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, FormView
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import login, authenticate
-from django.contrib import messages
+
 from .forms import RegisterForm
 from .models import User
 
@@ -59,3 +61,7 @@ class ProfileView(LoginView):
         if not request.user.is_authenticated:
             return redirect('accounts:login')
         return super().dispatch(request, *args, **kwargs)
+
+
+class HomeView(TemplateView):
+    template_name = "home.html"
