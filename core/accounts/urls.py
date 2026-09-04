@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import include, path
 
 from .views import (
     CustomLoginView,
@@ -19,4 +19,5 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("profile/", login_required(ProfileView.as_view()), name="profile"),
     path("profile/edit/", ProfileUpdateView.as_view(), name="edit_profile"),
+    path("api/v1/", include("accounts.api.v1.urls")),
 ]
