@@ -25,8 +25,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path("", include("accounts.urls", namespace="accounts")),
-    path("", include("tasks.urls", namespace="tasks")),
+    path("accounts/", include("accounts.urls", namespace="accounts")),
+    path("todos/", include("tasks.urls", namespace="tasks")),
 ]
 
 api_docs = [
